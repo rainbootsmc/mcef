@@ -8,6 +8,10 @@ group = "net.rainbootsmc"
 sourceCompatibility = JavaLanguageVersion.of(java_version as int)
 targetCompatibility = JavaLanguageVersion.of(java_version as int)
 
+java {
+    withSourcesJar()
+}
+
 repositories {
     mavenCentral()
     maven { url = 'https://maven.fabricmc.net/' }
