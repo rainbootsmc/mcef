@@ -80,6 +80,7 @@ tasks.register("cloneJcefAndPublish", GradleBuild) {
     group = "publishing"
     tasks = [
             ":cloneJcef",
-            ":fabric:publish"
+            ":common:publish",
+            ":fabric:publish",
     ]
 }
