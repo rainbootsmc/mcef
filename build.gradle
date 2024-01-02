@@ -75,3 +75,11 @@ tasks.register('cleanAll', GradleBuild) {
           ':forge:clean',
     ]
 }
+
+tasks.register("cloneJcefAndPublish", GradleBuild) {
+    group = "publishing"
+    tasks = [
+            ":cloneJcef",
+            ":fabric:publish"
+    ]
+}

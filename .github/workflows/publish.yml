@@ -21,7 +21,7 @@ jobs:
         uses: uTen2c/publish-to-github@v1.2
         with:
           publish-path: ${{ github.workspace }}/build/repo
-          publish-task: fabric:publish
+          publish-task: cloneJcefAndPublish
           repo: ${{ secrets.REPO }}
           token-user: ${{ secrets.TOKEN_USER }}
           token: ${{ secrets.TOKEN }}
