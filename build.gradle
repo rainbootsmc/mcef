@@ -4,7 +4,6 @@ plugins {
 
 tasks.register('cloneJcef', Exec) {
     commandLine 'git', 'submodule', 'update', '--init', '--recursive', 'common/java-cef'
-    println "JCEF commit hash: " + getCheckedOutGitCommitHash(project)
 }
 
 // https://gist.github.com/JonasGroeger/7620911
