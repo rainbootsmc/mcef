@@ -1,9 +1,7 @@
 plugins {
     id 'net.neoforged.gradle' version '6.0.+'
     id "org.spongepowered.mixin" version "0.7.+"
-    id 'com.matthewprenger.cursegradle' version "${cursegradle_version}"
     id 'com.github.johnrengelman.shadow' version "${shadow_version}"
-    id 'maven-publish'
 }
 
 var mod_version = mcef_version
@@ -33,34 +31,6 @@ minecraft {
 mixin {
     add sourceSets.main, 'mcef.refmap.json'
     config 'mcef.mixins.json'
-}
-
-/*
-    Add the following to ~/.gradle/gradle.properties
-    systemProp.org.gradle.s3.endpoint=https://<the s3 endpoint>
-    MCEF_S3_PUBLISH_URL_SNAPSHOT=s3://<bucket>/repositories/snapshots
-    MCEF_S3_PUBLISH_URL_RELEASE=s3://<bucket>/repositories/releases
-    MCEF_S3_PUBLISH_ACCESS_KEY=<access key>
-    MCEF_S3_PUBLISH_SECRET_KEY=<secret key>
- */
-publishing {
-    repositories {
-        maven {
-            url ((mcef_version.toString().endsWith("SNAPSHOT")) ? findProperty('MCEF_S3_PUBLISH_URL_SNAPSHOT') : findProperty('MCEF_S3_PUBLISH_URL_RELEASE'))
-            credentials(AwsCredentials) {
-                accessKey = findProperty('MCEF_S3_PUBLISH_ACCESS_KEY')
-                secretKey = findProperty('MCEF_S3_PUBLISH_SECRET_KEY')
-            }
-        }
-    }
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            groupId = 'com.cinemamod'
-            artifactId = 'mcef-forge'
-            version = mcef_version
-        }
-    }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
@@ -133,21 +103,6 @@ jar {
 tasks.register('deobfJar', Jar) {
     archiveClassifier = 'deobf'
     from sourceSets.main.output
-}
-
-curseforge {
-    apiKey = file("${rootDir}/curseforge_api_key.txt").exists() ? file("${rootDir}/curseforge_api_key.txt").text : ''
-    project {
-        id = curse_id
-        releaseType = release_type
-        addGameVersion minecraft_version
-        addGameVersion 'Forge'
-        addGameVersion 'NeoForge'
-        addGameVersion "Java ${java_version}"
-        mainArtifact(jar) {
-            displayName = "[FORGE][${minecraft_version}] ${mod_name} ${mod_version}"
-        }
-    }
 }
 
 jar.finalizedBy('reobfJar')

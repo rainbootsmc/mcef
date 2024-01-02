@@ -8,10 +8,9 @@
     "${mod_vendor}"
   ],
   "contact": {
-    "homepage": "https://github.com/CinemaMod/mcef",
-    "issues": "https://github.com/CinemaMod/mcef/issues",
-    "sources": "https://github.com/CinemaMod/mcef",
-    "discord": "https://discord.gg/rNrh5kW8Ty"
+    "homepage": "https://github.com/rainbootsmc/mcef",
+    "issues": "https://github.com/rainbootsmc/mcef/issues",
+    "sources": "https://github.com/rainbootsmc/mcef"
   },
   "license": "LGPL 2.1",
   "icon": "icon.png",
