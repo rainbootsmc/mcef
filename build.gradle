@@ -4,6 +4,7 @@ plugins {
 
 tasks.register('cloneJcef', Exec) {
     commandLine 'git', 'submodule', 'update', '--init', '--recursive', 'common/java-cef'
+    println "JCEF commit hash: " + getCheckedOutGitCommitHash(project)
 }
 
 // https://gist.github.com/JonasGroeger/7620911
@@ -78,8 +79,8 @@ tasks.register('cleanAll', GradleBuild) {
 
 tasks.register("cloneJcefAndPublish", GradleBuild) {
     group = "publishing"
+    dependsOn "cloneJcef"
     tasks = [
-            ":cloneJcef",
             ":common:publish",
             ":fabric:publish",
     ]
